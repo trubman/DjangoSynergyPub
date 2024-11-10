@@ -1,0 +1,47 @@
+{% extends 'hw/base_hw.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block secondtitle %}
+{{ title }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'hw/inc/_sidebar_hw.html' %}
+{% endblock %}
+
+{% block content %}
+{% for person in humans %}
+<div class="card 3" style="width: 1300px;">
+  {{ forloop.counter }}
+  <div class="card-header">
+    Категория: <a href="{{ person.profession.get_absolute_url }}"> {{ person.profession }} </a>
+  </div>
+  <div class="media" style="display:flex">
+    <div class="media-pfoto">
+      {% if person.passport_photo %}
+      <img src="{{ person.passport_photo.url }}" class="mr-3"  width="350" alt="Photo">
+      {% else %}
+      <h6>Нет фото</h6>
+      {% endif %}
+    </div>
+    <div class="mebia-body">
+      <div class="card-body">
+        <h5 class="card-title  {% cycle 'text-success' 'text-danger' 'text-primary' %}">
+          {{ person.first_name }} {{ person.middle_name }} {{ person.last_name }}</h5>
+        {% autoescape off %}
+        <p class="card-text">{{ person.biography|truncatewords:200|linebreaks }}</p>
+        {% endautoescape %}
+        <a href="{{ person.get_absolute_url }}" class="btn btn-primary">Еще</a>
+      </div>
+      <div class="card-footer text-body-secondary">
+        {{ person.date_of_birth|date:'Y-m-d' }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
+

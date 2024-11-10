@@ -1,0 +1,18 @@
+{% load human_tags %}
+
+<div class="list-group">
+  {% comment %}
+  {{ arg1 }} {{ arg2 }}
+  {% endcomment %}
+
+  <div class="list-group">
+   {% for prof in professions %}
+   <a href="{{ prof.get_absolute_url }}" class="list-group-item list-group-item-action">
+       {{ prof.title }}
+       <span class="badge bg-primary rounded-pill" style="width: 30px; color: white;">{{ prof.cnt }}</span>
+   </a>
+   {% endfor %}
+  </div>
+
+</div>
+

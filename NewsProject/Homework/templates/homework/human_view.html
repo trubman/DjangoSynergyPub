@@ -1,0 +1,46 @@
+{% extends 'hw/base_hw.html' %}
+
+{% block title %}
+{{ title }} :: {{ block.super }}
+{% endblock %}
+
+{% block secondtitle %}
+{{ title }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'hw/inc/_sidebar_hw.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="card 3" style="width: 1300px;">
+  <div class="card-header">
+    Категория: <a href="{{ human.profession.get_absolute_url }}"> {{ human.profession }} </a>
+  </div>
+
+    <div class="card-body">
+      {% if human.passport_photo %}
+      <img src="{{ human.passport_photo.url }}" class="mr-3"  width="350" alt="Photo">
+      {% else %}
+      <h6>Нет фото</h6>
+      {% endif %}
+    </div>
+
+      <div class="card-body">
+        <h5 class="card-title  {% cycle 'text-success' 'text-danger' 'text-primary' %}">
+          {{ human.first_name }} {{ human.middle_name }} {{ human.last_name }}</h5>
+        {% autoescape off %}
+        <p class="card-text">{{ human.biography|truncatewords:200|linebreaks }}</p>
+        {% endautoescape %}
+
+      </div>
+      <div class="card-footer text-body-secondary">
+        {{ human.date_of_birth|date:'Y-m-d' }}
+      </div>
+
+
+</div>
+
+{% endblock %}
+

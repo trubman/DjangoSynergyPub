@@ -1,0 +1,20 @@
+{% load human_tags %}
+
+<div class="list-group">
+
+    {% show_categories %}
+
+    {% comment %}
+    {% get_list_professions as professions %}
+
+    <div class="list-group">
+    {% for prof in professions %}
+     <a href="{{ prof.get_absolute_url }}" class="list-group-item list-group-item-action">
+        {{ prof.title }}
+     </a>
+    {% endfor %}
+    </div>
+    {% endcomment %}
+
+</div>
+
